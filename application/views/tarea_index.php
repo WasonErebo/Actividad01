@@ -44,29 +44,25 @@
             <form>
                 <div class="form-group">
                     <label for="servicio">Servicios</label>
-                    <select class="form-control">
-                        <?php foreach($servicio as $servi){ ?>
-                        <option><?php echo $servi->nombre; ?></option>
+                    <select class="form-control" id='servicio'>
+                        <?php foreach ($servicio as $servi) { ?>
+                            <option><?php echo $servi->nombre; ?></option>
                         <?php } ?>
-                        
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="unidad">Unidades</label>
-                    <select class="form-control">
-                        <?php foreach($unidad as $uni){ ?>
-                        <option><?php echo $uni->nombre; ?></option>
-                        <?php } ?>
-                        
+                    <select class="form-control" id='unidad'>
+
+
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="responsable">Responsables</label>
-                    <select class="form-control">
-                        <?php foreach($responsable as $res) { ?>
-                        <option><?php echo $res->nombre; ?></option>
-                        <?php } ?>
-                        
+                    <select class="form-control" id='responsable'>
+
+
                     </select>
                 </div>
                 <div class="form-group">
@@ -88,13 +84,16 @@
         <script type="text/javascript" src="<?php echo base_url("resources/js/jquery.min.js"); ?>"></script>
         <script type="text/javascript" src="<?php echo base_url("resources/js/bootstrap.min.js"); ?>"></script>
         <script>
-            $(document).ready(function(){
-                //alert("Hola Fecci");
-                $('#nombre').val("FECCI TIENE QUE HACER SU CAMA");
-                $('#nombre').click(function(){
-                    $('#nombre').val("MAMA NO QUIERO");
-                })
-            })
+            $(document).ready(function () {
+                //Cuando el servicio cambia
+                $('#servicio').change(function(){
+                    var servicio_id=$('#servicio').val();
+                    //Pidiendo JSON
+                $.get("Tarea/obtenerUnidades/"+servicio_id, function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+                });
+            });
 
 
         </script>
